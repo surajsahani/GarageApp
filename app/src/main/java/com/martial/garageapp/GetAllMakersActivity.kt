@@ -14,7 +14,7 @@ import org.json.JSONException
 
 class GetAllMakersActivity : AppCompatActivity(), NewsItemClicked {
     private lateinit var carRVModalArrayList: ArrayList<CarRVModal>
-    private lateinit var carRVModalPlusArrayList: ArrayList<CarRVModelPlus>
+    private lateinit var carRVModalPlusArrayList: ArrayList<CarRVModalPlus>
     private lateinit var carRVAdapter: CarRVAdapter
     private lateinit var carGetAllRV: RecyclerView
 
@@ -95,7 +95,14 @@ class GetAllMakersActivity : AppCompatActivity(), NewsItemClicked {
                         val Make_Name = dataObj.getString("Make_Name")
                         val Model_ID = dataObj.getString("Model_ID")
                         val Model_Name = dataObj.getString("Model_Name")
-                        carRVModalPlusArrayList.add(CarRVModelPlus(Make_ID, Make_Name, Model_ID, Model_Name))
+                        carRVModalPlusArrayList.add(
+                            CarRVModalPlus(
+                                Make_ID,
+                                Make_Name,
+                                Model_ID,
+                                Model_Name
+                            )
+                        )
 
                     }
                     carRVAdapter.notifyDataSetChanged()

@@ -1,13 +1,13 @@
 package com.martial.garageapp;
 
-public class CarRVModelPlus {
+public class CarRVModalPlus {
 
     private String makeName;
     private String makeID;
     private String ModelID;
     private String ModelName;
 
-    public CarRVModelPlus(String makeName, String makeID, String modelID, String modelName) {
+    public CarRVModalPlus(String makeName, String makeID, String modelID, String modelName) {
         this.makeName = makeName;
         this.makeID = makeID;
         ModelID = modelID;

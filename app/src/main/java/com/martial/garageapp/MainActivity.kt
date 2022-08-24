@@ -19,7 +19,7 @@ import com.martial.garageapp.utils.SharedHelper
 import org.json.JSONException
 
 
-class MainActivity : AppCompatActivity()  {
+class MainActivity : AppCompatActivity() {
     private lateinit var shared: SharedHelper
     private lateinit var bt_logout: Button
     private lateinit var mContext: Context
@@ -27,10 +27,22 @@ class MainActivity : AppCompatActivity()  {
     private lateinit var mRequestQueue: RequestQueue
     var queue: RequestQueue? = null
     private lateinit var carRV: RecyclerView
-    private lateinit var carRVAdapter: CarRVAdapter
-    private lateinit var carRVModalArrayList : ArrayList<CarRVModal>
 
-    private lateinit var autoCompleteTextViewMake : AutoCompleteTextView
+    //private lateinit var carRVAdapter: CarRVAdapter
+
+    private lateinit var carRVAdapterPlus: CarRVAdapterPlus
+
+    //private lateinit var carRVModalArrayList: ArrayList<CarRVModal>
+
+    private lateinit var carRVModalArrayListPlus: ArrayList<CarRVModalPlus>
+
+    //private lateinit var  textInputLayout : TextInputLayout
+    private lateinit var textInputLayout: AutoCompleteTextView
+
+    private lateinit var autoCompleteTextViewMake: AutoCompleteTextView
+    private lateinit var autoCompleteTextViewModel: AutoCompleteTextView
+    private lateinit var addCar: Button
+    private lateinit var context: Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,11 +53,20 @@ class MainActivity : AppCompatActivity()  {
 //        mRequestQueue = Volley.newRequestQueue(this)
 //        queue = Volley.newRequestQueue(mContext)
 //        jsonVolley()
-        carRVModalArrayList = ArrayList()
-        carRVAdapter = CarRVAdapter(carRVModalArrayList, this)
+        //carRVModalArrayList = ArrayList()
+        carRVModalArrayListPlus = ArrayList()
+
+//        carRVAdapter = CarRVAdapter(carRVModalArrayList, this)
+//        carRV.layoutManager = LinearLayoutManager(this)
+//        //carRV.adapter = carRVAdapter
+//        carRV.setAdapter(carRVAdapter)
+//        //getCurrencyData()
+
+
+        carRVAdapterPlus = CarRVAdapterPlus(carRVModalArrayListPlus, this)
         carRV.layoutManager = LinearLayoutManager(this)
         //carRV.adapter = carRVAdapter
-        carRV.setAdapter(carRVAdapter)
+        carRV.setAdapter(carRVAdapterPlus)
         //getCurrencyData()
     }
 
@@ -56,6 +77,10 @@ class MainActivity : AppCompatActivity()  {
         mContext = this
         shared = SharedHelper(mContext)
         carRV = findViewById(R.id.rv_car)
+//        textInputLayout = findViewById(R.id.model)
+        addCar = findViewById(R.id.bt_addcar)
+        autoCompleteTextViewModel = findViewById(R.id.autoCompleteTextViewModel)
+
     }
 
     private fun onclick() {
@@ -70,6 +95,11 @@ class MainActivity : AppCompatActivity()  {
         autoCompleteTextViewMake.setOnClickListener {
             val intent = Intent(this, GetAllMakersActivity::class.java)
             startActivity(intent)
+        }
+        addCar.setOnClickListener {
+            val makeID: String = autoCompleteTextViewModel.getText().toString()
+            Toast.makeText(this, makeID, Toast.LENGTH_SHORT).show();
+            getModeCarData()
         }
     }
 
@@ -162,9 +192,52 @@ class MainActivity : AppCompatActivity()  {
         }
     }
 
-    private fun getCurrencyData() {
+//    private fun getCarData() {
+//
+//        val url = "https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json"
+//        val requestQueue = Volley.newRequestQueue(this)
+//        val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(
+//            Method.GET, url, null,
+//            Response.Listener { response ->
+//
+//                try {
+//                    val dataArray = response.getJSONArray("Results")
+//                    for (i in 0 until dataArray.length()) {
+//                        val dataObj = dataArray.getJSONObject(i)
+//                        val Make_Name = dataObj.getString("Make_Name")
+//                        val Make_ID = dataObj.getString("Make_ID")
+//                        carRVModalArrayList.add(CarRVModal(Make_Name, Make_ID))
+//
+//                    }
+//                    carRVAdapter.notifyDataSetChanged()
+//                } catch (e: JSONException) {
+//                    e.printStackTrace()
+//                    Toast.makeText(
+//                        this@MainActivity,
+//                        "Failed to extract JSON data...",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            },
+//            Response.ErrorListener { error: VolleyError? ->
+//                Toast.makeText(this@MainActivity, "Failed to get the data...", Toast.LENGTH_SHORT)
+//                    .show()
+//            }) {
+//
+//
+//        }
+//        requestQueue.add(jsonObjectRequest)
+//    }
 
-        val url = "https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json"
+    private fun getModeCarData() {
+
+        val makeID: String = autoCompleteTextViewModel.text.toString()
+
+
+        val url =
+            "https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeId/" + makeID + "?format=json"
+
+//        Toast.makeText(this,"$MakeId , This is makeId", Toast.LENGTH_SHORT).show()
         val requestQueue = Volley.newRequestQueue(this)
         val jsonObjectRequest: JsonObjectRequest = object : JsonObjectRequest(
             Method.GET, url, null,
@@ -174,12 +247,22 @@ class MainActivity : AppCompatActivity()  {
                     val dataArray = response.getJSONArray("Results")
                     for (i in 0 until dataArray.length()) {
                         val dataObj = dataArray.getJSONObject(i)
-                        val Make_Name = dataObj.getString("Make_Name")
-                        val Make_ID = dataObj.getString("Make_ID")
-                        carRVModalArrayList.add(CarRVModal(Make_Name,Make_ID))
+                        val makeName = dataObj.getString("Make_ID")
+                        val makeID = dataObj.getString("Make_Name")
+                        val modelID = dataObj.getString("Model_ID")
+                        val modelName = dataObj.getString("Model_Name")
+                        //carRVModalArrayList.add(CarRVModal(Make_Name, Make_ID))
+                        carRVModalArrayListPlus.add(
+                            CarRVModalPlus(
+                                makeName,
+                                makeID,
+                                modelID,
+                                modelName
+                            )
+                        )
 
                     }
-                    carRVAdapter.notifyDataSetChanged()
+                    carRVAdapterPlus.notifyDataSetChanged()
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     Toast.makeText(
@@ -192,8 +275,7 @@ class MainActivity : AppCompatActivity()  {
             Response.ErrorListener { error: VolleyError? ->
                 Toast.makeText(this@MainActivity, "Failed to get the data...", Toast.LENGTH_SHORT)
                     .show()
-            })
-        {
+            }) {
 
 
         }
