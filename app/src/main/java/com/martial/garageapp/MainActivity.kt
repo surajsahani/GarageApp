@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             shared.clear()
             Toast.makeText(mContext, "Logout Success", Toast.LENGTH_SHORT).show()
             val backToLogin = Intent(mContext, LoginActivity::class.java)
-            backToLogin.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            //backToLogin.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(backToLogin)
             finish()
         }
