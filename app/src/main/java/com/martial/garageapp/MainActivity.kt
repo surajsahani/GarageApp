@@ -19,7 +19,7 @@ import com.martial.garageapp.utils.SharedHelper
 import org.json.JSONException
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()  {
     private lateinit var shared: SharedHelper
     private lateinit var bt_logout: Button
     private lateinit var mContext: Context
@@ -198,4 +198,5 @@ class MainActivity : AppCompatActivity() {
         }
         requestQueue.add(jsonObjectRequest)
     }
+
 }

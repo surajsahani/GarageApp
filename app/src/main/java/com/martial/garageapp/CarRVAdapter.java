@@ -29,6 +29,7 @@ public class CarRVAdapter extends RecyclerView.Adapter<CarRVAdapter.ViewHolder> 
     @Override
     public CarRVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.car_rv_item, parent, false);
+
         return new CarRVAdapter.ViewHolder(view);
     }
 
@@ -52,6 +53,12 @@ public class CarRVAdapter extends RecyclerView.Adapter<CarRVAdapter.ViewHolder> 
             makeId = itemView.findViewById(R.id.Make_ID);
         }
     }
+
+
+}
+interface NewsItemClicked {
+    void onItemClicked(CarRVModal item);
+    //fun onItemClicked(item: News)
 }
 
 
