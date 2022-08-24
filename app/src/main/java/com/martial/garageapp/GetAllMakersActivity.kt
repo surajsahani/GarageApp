@@ -95,14 +95,14 @@ class GetAllMakersActivity : AppCompatActivity(), NewsItemClicked {
                         val Make_Name = dataObj.getString("Make_Name")
                         val Model_ID = dataObj.getString("Model_ID")
                         val Model_Name = dataObj.getString("Model_Name")
-                        carRVModalPlusArrayList.add(
-                            CarRVModalPlus(
-                                Make_ID,
-                                Make_Name,
-                                Model_ID,
-                                Model_Name
-                            )
-                        )
+//                        carRVModalPlusArrayList.add(
+//                            CarRVModalPlus(
+//                                Make_ID,
+//                                Make_Name,
+//                                Model_ID,
+//                                Model_Name
+//                            )
+//                        )
 
                     }
                     carRVAdapter.notifyDataSetChanged()

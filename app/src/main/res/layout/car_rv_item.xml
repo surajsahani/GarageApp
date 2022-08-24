@@ -9,7 +9,7 @@
     app:cardBackgroundColor="@color/black_shade_2">
 
     <RelativeLayout
-        android:id="@+id/RLCurrency"
+        android:id="@+id/RLCar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

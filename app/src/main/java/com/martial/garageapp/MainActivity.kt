@@ -231,11 +231,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun getModeCarData() {
 
-        val makeID: String = autoCompleteTextViewModel.text.toString()
+        val inputValueMakeID: String = autoCompleteTextViewModel.text.toString()
 
 
-        val url =
-            "https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeId/" + makeID + "?format=json"
+        val url = "https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeId/" + inputValueMakeID + "?format=json"
 
 //        Toast.makeText(this,"$MakeId , This is makeId", Toast.LENGTH_SHORT).show()
         val requestQueue = Volley.newRequestQueue(this)
@@ -247,16 +246,14 @@ class MainActivity : AppCompatActivity() {
                     val dataArray = response.getJSONArray("Results")
                     for (i in 0 until dataArray.length()) {
                         val dataObj = dataArray.getJSONObject(i)
-                        val makeName = dataObj.getString("Make_ID")
-                        val makeID = dataObj.getString("Make_Name")
-                        val modelID = dataObj.getString("Model_ID")
+                        //val makeName = dataObj.getString("Make_ID")
+                        val makeName = dataObj.getString("Make_Name")
+                        //val modelID = dataObj.getString("Model_ID")
                         val modelName = dataObj.getString("Model_Name")
                         //carRVModalArrayList.add(CarRVModal(Make_Name, Make_ID))
                         carRVModalArrayListPlus.add(
                             CarRVModalPlus(
                                 makeName,
-                                makeID,
-                                modelID,
                                 modelName
                             )
                         )

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +52,7 @@ public class CarRVAdapter extends RecyclerView.Adapter<CarRVAdapter.ViewHolder> 
             super(itemView);
             makeName = itemView.findViewById(R.id.Make_Name);
             makeId = itemView.findViewById(R.id.Make_ID);
+
         }
     }
 
