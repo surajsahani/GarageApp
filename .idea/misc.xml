@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.22" />
         <entry key="app/src/main/res/layout/car_rv_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/car_rv_item_plus.xml" value="0.1" />
         <entry key="app/src/main/res/layout/car_rv_layout.xml" value="0.25" />
       </map>
     </option>

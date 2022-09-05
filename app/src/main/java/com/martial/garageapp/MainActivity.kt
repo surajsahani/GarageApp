@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         addCar.setOnClickListener {
-            val makeID: String = autoCompleteTextViewModel.getText().toString()
+            val makeID: String = autoCompleteTextViewModel.text.toString()
             Toast.makeText(this, makeID, Toast.LENGTH_SHORT).show();
             getModeCarData()
         }
@@ -234,7 +234,8 @@ class MainActivity : AppCompatActivity() {
         val inputValueMakeID: String = autoCompleteTextViewModel.text.toString()
 
 
-        val url = "https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeId/" + inputValueMakeID + "?format=json"
+        val url =
+            "https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeId/$inputValueMakeID?format=json"
 
 //        Toast.makeText(this,"$MakeId , This is makeId", Toast.LENGTH_SHORT).show()
         val requestQueue = Volley.newRequestQueue(this)
